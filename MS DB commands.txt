@@ -1,0 +1,15 @@
+CREATE TABLE [dbo].[Table]
+(
+	[Guid]   UNIQUEIDENTIFIER NOT NULL DEFAULT newid(),
+    [Name]   NVARCHAR (128) NOT NULL,
+    [Author] NVARCHAR (128) NOT NULL,
+    [ISBN]   NVARCHAR (17) NOT NULL,
+    [Year]   INT NOT NULL
+)
+
+
+INSERT INTO [dbo].Books ([Guid], [Name], [Author], [ISBN], [Year])
+VALUES
+(NEWID(), 'Design Patterns', 'Gamme et al.', '978-0-201-63361-0', 2007),
+(NEWID(), 'The Art of Computer Programming Volume 1', 'Donald E. Knuth', '978-0-201-89683-0', 2009),
+(NEWID(), 'Clean Code', 'Robert C. Martin', '978-0-13-235088-4', 2009)

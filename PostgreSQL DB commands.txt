@@ -1,0 +1,22 @@
+CREATE DATABASE IF NOT EXISTS BooksDB;
+
+\c BooksDB
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE public."books"
+(
+    "guid" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    "name" varchar(128) NOT NULL,
+    "author" varchar(128) NOT NULL,
+    "isbn" varchar(17) NOT NULL,
+    "year" integer NOT NULL
+);
+
+
+INSERT INTO public."books"(
+	"name", "author", "isbn", "year")
+	VALUES
+	('Design Patterns', 'Gamme et al.', '978-0-201-63361-0', 2007),
+	('The Art of Computer Programming Volume 1', 'Donald E. Knuth', '978-0-201-89683-0', 2009),
+	('Clean Code', 'Robert C. Martin', '978-0-13-235088-4', 2009);
