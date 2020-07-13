@@ -34,7 +34,12 @@ namespace DataStorageAPI.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<Book>> Get(string id)
         {
-            Guid guid = Guid.Parse(id);
+
+            if (!Guid.TryParse(id, out Guid guid))
+            {
+                return BadRequest();
+            }
+
             Book book = await _repository.GetById(guid);
 
             if (book != null)
@@ -63,10 +68,17 @@ namespace DataStorageAPI.Controllers
 
         // PUT: api/books/5
         [HttpPut("{id}")]
-        public async void Put(string id, [FromBody] Book book)
+        public async Task<ActionResult> Put(string id, [FromBody] Book book)
         {
-            Guid guid = Guid.Parse(id);
+
+            if (!Guid.TryParse(id, out Guid guid))
+            {
+                return BadRequest();
+            }
+
             await _repository.Update(guid, book);
+
+            return Ok();
         }
 
         // DELETE: api/books/5
